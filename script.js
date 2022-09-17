@@ -17,9 +17,11 @@ var generatePassword = function () {
 
   if (userLength < high && userLength > low && typeLow && typeUp && typeNum && typeSpec) {
     for (var i = 0; i < userLength; i++) {
+      var passText = ' ';
       var randomNumber = Math.floor(Math.random() * characters.length);
-      
-    }
+      passText+= characters.substring(randomNumber, randomNumber+1);
+      console.log(passText);
+    } return passText;
   }
 }
 // Get references to the #generate element - generate button
