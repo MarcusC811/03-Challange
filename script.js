@@ -20,7 +20,7 @@ var generatePassword = function () {
       var passText = ' ';
       var randomNumber = Math.floor(Math.random() * characters.length);
       passText+= characters.substring(randomNumber, randomNumber+1);
-      console.log(passText);
+      console.log(String.passText);
     } return passText;
   }
 }
