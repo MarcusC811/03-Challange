@@ -5,8 +5,8 @@ var selectType = {
     upper: charUpper,
     number: charNum,
     special: charSpec
-};
-
+}
+console.log(typeof selectType);
 // New Specific char gens
 var charUpper = function () {
     const capLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -45,17 +45,15 @@ function writePassword(length, lower, upper, number, special) {
     var inputCount = lower + upper + number + special;
     var inputArr = [{lower}, {upper}, {number}, {special}].filter (item => Object.values(item) [0]);
 
-    if(inputCount === 0) {
-        return;
-    }
     
     for (i = 0; i < length; i += inputCount) {
-        inputArr.forEach(input=> {
-            const charSet = Object.keys(input)[0]
+        inputArr.forEach(type => {
+            const charSet = Object.keys(type)[0];
             
-            finalPass += selectType[charSet]()
+            finalPass += selectType[charSet]();
         });
     }
+    console.log(finalPass);
 }
 
 // Add event listener to generate button
@@ -64,6 +62,11 @@ function writePassword(length, lower, upper, number, special) {
 // Initializes prompts for generate button
 generateBtn.addEventListener("click", () => {
     var userLength = prompt('choose a length of at least 8 characters and no more than 128 characters');
+
+    if(Number(userLength) < 8 || Number(userLength) > 128) {
+        return;
+    }
+
     var typeLow = prompt('Do you want include lowercase characters?');
     var typeUp = prompt('Do you want include uppercase characters?');
     var typeNum = prompt('Do you want include numeric characters?');
