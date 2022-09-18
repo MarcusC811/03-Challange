@@ -1,6 +1,6 @@
 // Entire character set object
 var passwordText = document.querySelector("#password");
-var charSet = {
+var selectType = {
     lower: charLower,
     upper: charUpper,
     number: charNum,
@@ -40,11 +40,22 @@ charSpec();
 var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
-function writePassword() {
-  var password = generatePassword();
+function writePassword(length, lower, upper, number, special) {
+    var finalPass = ' ';
+    var inputCount = lower + upper + number + special;
+    var inputArr = [{lower}, {upper}, {number}, {special}].filter (item => Object.values(item) [0]);
 
-  passwordText.value = password;
-
+    if(inputCount === 0) {
+        return;
+    }
+    
+    for (i = 0; i < length; i += inputCount) {
+        inputArr.forEach(input=> {
+            const charSet = Object.keys(input)[0]
+            
+            finalPass += selectType[charSet]()
+        });
+    }
 }
 
 // Add event listener to generate button
@@ -65,9 +76,5 @@ generateBtn.addEventListener("click", () => {
     const inputNumber = typeNum === 'yes' || !typeNum === 'no';
     const inputSpec = typeSpec === 'yes' || !typeSpec === 'no';
 
-    passwordText.innerText = generatePassword(inputLength, inputLow, inputUpper, inputNumber, inputSpec);
+    passwordText.innerText = writePassword(inputLength, inputLow, inputUpper, inputNumber, inputSpec);
 });
-
-function generatePassword (length, lower, upper, number, special) {
-    
-}
