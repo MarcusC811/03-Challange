@@ -1,4 +1,5 @@
 // Entire character set object
+var passwordText = document.querySelector("#password");
 var charSet = {
     lower: charLower,
     upper: charUpper,
@@ -41,7 +42,6 @@ var generateBtn = document.querySelector("#generate");
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
-  var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
 
@@ -50,8 +50,8 @@ function writePassword() {
 // Add event listener to generate button
 // generateBtn.addEventListener("click", writePassword);
 
-var generatePassword = function () {
-
+// Initializes prompts for generate button
+generateBtn.addEventListener("click", () => {
     var userLength = prompt('choose a length of at least 8 characters and no more than 128 characters');
     var typeLow = prompt('Do you want include lowercase characters?');
     var typeUp = prompt('Do you want include uppercase characters?');
@@ -59,11 +59,15 @@ var generatePassword = function () {
     var typeSpec = prompt('Do you want include special characters?');
 
 
-    const  Number(userLength);
-    console.log(typeLow === 'yes' || !typeLow === 'no');
-    console.log(typeUp === 'yes' || !typeUp === 'no');
-    console.log(typeNum === 'yes' || !typeNum === 'no');
-    console.log(typeSpec === 'yes' || !typeSpec === 'no');
-}
+    const inputLength = Number(userLength);
+    const inputLow = typeLow === 'yes' || !typeLow === 'no';
+    const inputUpper = typeUp === 'yes' || !typeUp === 'no';
+    const inputNumber = typeNum === 'yes' || !typeNum === 'no';
+    const inputSpec = typeSpec === 'yes' || !typeSpec === 'no';
 
-generateBtn.addEventListener("click", generatePassword);
+    passwordText.innerText = generatePassword(inputLength, inputLow, inputUpper, inputNumber, inputSpec);
+});
+
+function generatePassword (length, lower, upper, number, special) {
+    
+}
