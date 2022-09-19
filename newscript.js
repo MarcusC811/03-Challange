@@ -6,13 +6,11 @@ const randomFunc = {
 	number: charNum,
 	symbol: charSpec
 }
-console.log(typeof randomFunc);
 
 // Get references to the #generate element - defines generate button 
 var generateBtn = document.querySelector("#generate");
 
 // Add event listener to generate button
-// generateBtn.addEventListener("click", writePassword);
 
 // Initializes prompts for generate button
 generateBtn.addEventListener("click", () => {
@@ -41,42 +39,55 @@ generateBtn.addEventListener("click", () => {
 function writePassword(length, lower, upper, number, special) {
     let finalPass = ' ';
     var inputCount = lower + upper + number + special; //number
-    console.log(inputCount);
     var inputArr = [{lower}, {upper}, {number}, {special}].filter(item => Object.values(item)[0]); //Object that is filtering out what is true and what isnt
-    console.log(inputArr);
     var inputKey = Object.keys(inputArr);
-    console.log(inputKey);
     
     for (i=0; i < length; i+= inputCount) {
+        if(lower) {
+            finalPass += charLower();
+        } else {
+            return;
+        }
 
+        if(upper) {
+            finalPass += charUpper();
+        } else {
+            return;
+        }
+
+        if(number) {
+            finalPass += charNum();
+        } else {
+            return;
+        }
+
+        if(special) {
+            finalPass += charSpec();
+        } else {
+            return;
+        }
     }
+
+    return finalPass.slice(0, length+1);
 }
 
 // New Specific char gens
 var charUpper = function () {
     const capLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    console.log(capLetters[(Math.floor(Math.random() * capLetters.length))]);
+    return capLetters[(Math.floor(Math.random() * capLetters.length))];
   }
-
-charUpper();
 
 var charLower = function () {
     const lowerLetter = "abcdefghijklmnopqrstuvwxyz";
-    console.log(lowerLetter[(Math.floor(Math.random() * lowerLetter.length))]);
+    return lowerLetter[(Math.floor(Math.random() * lowerLetter.length))];
 }
-
-charLower();
 
 var charNum = function () {
     const numText = "0123456789";
-    console.log(numText[(Math.floor(Math.random() * numText.length))]);
+    return numText[(Math.floor(Math.random() * numText.length))];
 }
-
-charNum();
 
 var charSpec = function () {
     const specText = "!@#$%^&*()";
-    console.log(specText[Math.floor(Math.random() * specText.length)]);
+    return specText[Math.floor(Math.random() * specText.length)];
 }
-
-charSpec();
