@@ -11,7 +11,7 @@ Click on the "Generate Password" button on the screen to initialize the prompts.
 Enter how long you'd like the password to be
 
 ## Step 3:
-Select the criteria of the password in the window prompt
+Select the criteria of the password in the window prompt yes or no
 
 ## Step 4:
 Enjoy your password!
